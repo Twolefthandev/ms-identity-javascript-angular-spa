@@ -8,34 +8,34 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [
-      MsalGuard
-    ]
+    canActivate: [MsalGuard],
   },
   {
     // Needed for hash routing
     path: 'code',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     // Needed for Error routing
     path: 'error',
-    component: HomeComponent
-  }
+    component: HomeComponent,
+  },
 ];
 
 const isIframe = window !== window.parent && !window.opener;
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    useHash: true,
-    // Don't perform initial navigation in iframes
-    initialNavigation: !isIframe ? 'enabled' : 'disabled'
-  })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      useHash: true,
+      // Don't perform initial navigation in iframes
+      initialNavigation: !isIframe ? 'enabledNonBlocking' : 'disabled',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
