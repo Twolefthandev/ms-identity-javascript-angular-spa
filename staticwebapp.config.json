@@ -1,6 +1,10 @@
 {
-    "navigationFallback": {
-      "rewrite": "/index.html",
-      "exclude": ["/images/*.{png,jpg,gif}", "/css/*"]
-    }
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/images/*.{png,jpg,gif}", "/css/*"]
+  },
+  "globalHeaders": {
+    "Access-Control-Allow-Origin": "https://kv-sssu-demo-fc.vault.azure.net/",
+    "Access-Control-Allow-Methods": "POST, GET,"
   }
+}
