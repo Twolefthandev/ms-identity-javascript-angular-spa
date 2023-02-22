@@ -4,7 +4,7 @@
     "exclude": ["/images/*.{png,jpg,gif}", "/css/*"]
   },
   "globalHeaders": {
-    "Access-Control-Allow-Origin": "https://kv-sssu-demo-fc.vault.azure.net/",
-    "Access-Control-Allow-Methods": "POST, GET"
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS, DELETE, PUT"
   }
 }
