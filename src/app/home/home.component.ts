@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
-import { SecretClient } from '@azure/keyvault-secrets';
+import { KeyVaultSecret, SecretClient } from '@azure/keyvault-secrets';
 import { InteractiveBrowserCredential } from '@azure/identity';
 import {
   EventMessage,
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   client: SecretClient;
   secretName: string;
   envVariable: string;
-  secretValue = '';
+  secretValue: string;
 
   constructor(
     private authService: MsalService,
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     this.envVariable = environment.appversion;
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.msalBroadcastService.msalSubject$
       .pipe(
         filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS)
@@ -52,13 +52,13 @@ export class HomeComponent implements OnInit {
         this.authService.instance.setActiveAccount(payload.account);
       });
 
-    async () => {
-      // Read the secret we created
-      var secret = await this.client.getSecret(this.secretName);
-      this.secretValue = secret.value ? secret.value : '';
-    };
-
+    var secret = await this.getSecret();
+    this.secretValue = secret.value ? secret.value : 'No Secret Found';
     this.setLoginDisplay();
+  }
+
+  getSecret() {
+    return this.client.getSecret(this.secretName);
   }
 
   setLoginDisplay() {
