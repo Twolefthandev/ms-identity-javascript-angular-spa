@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { SecretClient } from '@azure/keyvault-secrets';
-import { DefaultAzureCredential } from '@azure/identity';
+import { InteractiveBrowserCredential } from '@azure/identity';
 import {
   EventMessage,
   EventType,
@@ -29,7 +29,12 @@ export class HomeComponent implements OnInit {
   ) {
     this.appversion = environment.appversion;
     const keyVaultName = environment.keyvaultname;
-    var credential = new DefaultAzureCredential();
+    var credential = new InteractiveBrowserCredential({
+      tenantId: 'fe85910f-e6e0-43da-a1ec-9e4e94a9f6c4',
+      clientId: '25b87be3-3584-43de-9049-33139895fc5a',
+      redirectUri: 'https://victorious-meadow-0bb785603.1.azurestaticapps.net',
+    });
+
     const url = `https://${keyVaultName}.vault.azure.net`;
     this.client = new SecretClient(url, credential);
     this.secretName = environment.secretname;
