@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   client: SecretClient;
   secretName: string;
   envVariable: string;
-  secretValue: string;
+  secretValue = '';
 
   constructor(
     private authService: MsalService,
