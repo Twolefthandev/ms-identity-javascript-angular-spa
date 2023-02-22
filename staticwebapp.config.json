@@ -5,6 +5,6 @@
   },
   "globalHeaders": {
     "Access-Control-Allow-Origin": "https://kv-sssu-demo-fc.vault.azure.net/",
-    "Access-Control-Allow-Methods": "POST, GET,"
+    "Access-Control-Allow-Methods": "POST, GET"
   }
 }
